@@ -26,3 +26,67 @@ Como reto, te proponemos que modifiques el ejercicio anterior y en vez de tener 
    - Un botón `<button>` con el tipo establecido en `"submit"` y el texto "Add".
 5. Utiliza la función `changeName` para manejar el evento `onSubmit` del formulario. Esto asegurará que el nombre se actualice cuando el formulario se envíe.
 6. Exporta el componente `App` al final del archivo.
+
+
+
+RESPUESTA PROFE
+
+
+
+
+import { useState } from "react";
+import "./App.css";
+function App() {
+  const [name, setName] = useState("Sofía");
+  const [newName, setNewName] = useState("");
+  const changeName = () => {
+    const text = newName.trim(); // recorta los espacios de newName
+    if (text != "") {
+      //Actualiza el estado `name` con el valor de `newName`.
+      setName(text);
+      //Restablece `newName` a una cadena vacía después de actualizar el nombre.
+      setNewName("");
+      alert(`El nuevo nombre es: ${text}`);
+    }
+  };
+
+
+
+
+
+  -------------------------------
+
+
+
+    const handleChange = (e) => {
+    console.log(e.target);
+    setNewName(e.target.value);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Cambiar nombre
+    changeName();
+  };
+  //Aquí tu código
+  return (
+    <div>
+      <h2>Teacher name: {name}</h2>
+      <ul>
+        <li onClick={() => setName("Data")}>Data</li>
+        <li onClick={() => setName("Reyes")}>Reyes</li>
+        <li onClick={() => setName("Yolanda")}>Yolanda</li>
+      </ul>
+      <button onClick={changeName}>Cambio a Alex!</button>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={newName}
+          placeholder="add a name"
+          onChange={handleChange}
+        />
+        <button>Cambiar nombre</button>
+      </form>
+    </div>
+  );
+}
+export default App;
